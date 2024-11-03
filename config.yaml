@@ -1,0 +1,19 @@
+mqtt:
+  hostname: "mqtt.beispielserver.com"
+  port: 1883
+  username: "mqtt_user"
+  password: "mqtt_passwort"
+
+database:
+  host: "db.beispielserver.com"
+  user: "db_user"
+  password: "db_passwort"
+  database: "meine_datenbank"
+
+imap:
+  server: "imap.dein-email-server.com"
+  user: "deine-email@dein-server.com"
+  password: "dein-passwort"
+  whitelist:
+    - "whitelist@example.com"
+    - "device@example.com"
