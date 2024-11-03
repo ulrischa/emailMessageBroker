@@ -1,0 +1,53 @@
+services:
+  licht_wohnzimmer:
+    action: "Licht im Wohnzimmer"
+    parameters:
+      - name: "aktion"
+        required: true
+        options: ["an", "aus"]
+    type: "function"
+    function: "switch_light"
+
+  klimaanlage:
+    action: "Klimaanlage"
+    parameters:
+      - name: "temperatur"
+        required: true
+      - name: "modus"
+        required: false
+        options: ["kühl", "heizen"]
+    type: "function"
+    function: "set_ac_temperature"
+
+  heizung:
+    action: "Heizung"
+    parameters:
+      - name: "temperatur"
+        required: true
+    type: "http"
+    method: "POST"
+    url: "http://localhost:5000/api/heizung"
+
+  system_neustart:
+    action: "System Neustart"
+    parameters: []
+    type: "shell"
+    command: "reboot"
+
+  benutzer_protokollieren:
+    action: "Benutzer Protokollieren"
+    parameters:
+      - name: "benutzer_id"
+        required: true
+      - name: "aktion"
+        required: true
+    type: "database"
+    query: "INSERT INTO protokoll (benutzer_id, aktion) VALUES (%(benutzer_id)s, %(aktion)s)"
+
+  benachrichtigung:
+    action: "Benachrichtigung"
+    parameters:
+      - name: "nachricht"
+        required: true
+    type: "mqtt"
+    topic: "home/notifications"
